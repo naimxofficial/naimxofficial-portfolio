@@ -198,7 +198,7 @@ export default function Projects() {
                                         >
                                             Client
                                         </a>
-                                        {project.serverRepo ? (
+                                        {project.serverRepo && (
                                             <a
                                                 href={project.serverRepo}
                                                 target="_blank"
@@ -206,15 +206,6 @@ export default function Projects() {
                                                 className="project-btn project-btn--outline"
                                             >
                                                 Server
-                                            </a>
-                                        ) : (
-                                            <a
-                                                href={project.clientRepo}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="project-btn project-btn--outline"
-                                            >
-                                                Source Code
                                             </a>
                                         )}
                                     </div>
