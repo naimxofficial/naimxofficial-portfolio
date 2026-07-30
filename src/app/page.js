@@ -1,4 +1,10 @@
 import Hero from "./components/Hero";
+import About from "./components/About";
+import Skills from "./components/Skills";
+import Projects from "./components/Projects";
+import Education from "./components/Education";
+import Contact from "./components/Contact";
+import Footer from "./components/Footer";
 
 export default function Home() {
   return (
@@ -6,47 +12,23 @@ export default function Home() {
       {/* Hero Section */}
       <Hero />
 
-      {/* Spacer sections for scroll testing */}
-      <section
-        id="about"
-        className="min-h-screen flex items-center justify-center"
-      >
-        <h2 className="text-4xl font-heading font-bold text-gradient">About</h2>
-      </section>
+      {/* About Section */}
+      <About />
 
-      <section
-        id="skills"
-        className="min-h-screen flex items-center justify-center"
-      >
-        <h2 className="text-4xl font-heading font-bold text-gradient">Skills</h2>
-      </section>
+      {/* Skills Section */}
+      <Skills />
 
-      <section
-        id="projects"
-        className="min-h-screen flex items-center justify-center"
-      >
-        <h2 className="text-4xl font-heading font-bold text-gradient">
-          Projects
-        </h2>
-      </section>
+      {/* Projects Section */}
+      <Projects />
 
-      <section
-        id="education"
-        className="min-h-screen flex items-center justify-center"
-      >
-        <h2 className="text-4xl font-heading font-bold text-gradient">
-          Education
-        </h2>
-      </section>
+      {/* Education Section */}
+      <Education />
 
-      <section
-        id="contact"
-        className="min-h-screen flex items-center justify-center"
-      >
-        <h2 className="text-4xl font-heading font-bold text-gradient">
-          Contact
-        </h2>
-      </section>
+      {/* Contact Section */}
+      <Contact />
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }

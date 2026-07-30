@@ -3,153 +3,170 @@
 import { motion } from "motion/react";
 import { VscVscode } from "react-icons/vsc";
 import {
-    SiGooglefonts,
-    SiPenpot,
-    SiVite,
-    SiHtml5,
-    SiJavascript,
-    SiReact,
-    SiNextdotjs,
     SiTailwindcss,
-    SiDaisyui,
-    SiFramer,
-    SiReactrouter,
+    SiNextdotjs,
     SiMongodb,
     SiExpress,
     SiNodedotjs,
-    SiStripe,
-    SiAxios,
+    SiReact,
+    SiDaisyui,
+    SiFramer,
     SiGit,
     SiGithub,
-    SiVercel,
+    SiStripe,
     SiNetlify,
-    SiFigma,
+    SiVercel,
+    SiGreensock,
 } from "react-icons/si";
-import { DiCss3 } from "react-icons/di";
 import {
     HiOutlineShieldCheck,
-    HiOutlineMail,
-    HiOutlineChartBar,
-    HiOutlineSparkles,
     HiOutlineColorSwatch,
-    HiOutlineCube,
     HiOutlineCode,
 } from "react-icons/hi";
+import { TbApi } from "react-icons/tb";
 
-const SKILL_GROUPS = [
-    {
-        title: "Frontend",
-        skills: [
-            { name: "HTML5", icon: SiHtml5 },
-            { name: "CSS3", icon: DiCss3 },
-            { name: "JavaScript", icon: SiJavascript },
-            { name: "React", icon: SiReact },
-            { name: "Vite", icon: SiVite },
-            { name: "Next.js", icon: SiNextdotjs },
-            { name: "Tailwind CSS", icon: SiTailwindcss },
-            { name: "DaisyUI", icon: SiDaisyui },
-            { name: "Hero UI", icon: HiOutlineColorSwatch },
-            { name: "Framer Motion", icon: SiFramer },
-            { name: "React Icons", icon: HiOutlineCube },
-            { name: "Next Themes", icon: HiOutlineSparkles },
-            { name: "React Router", icon: SiReactrouter },
-            { name: "DOM", icon: HiOutlineCode },
-        ],
-    },
-    {
-        title: "Backend",
-        skills: [
-            { name: "Node.js", icon: SiNodedotjs },
-            { name: "Express.js", icon: SiExpress },
-            { name: "MongoDB", icon: SiMongodb },
-            { name: "Better Auth", icon: HiOutlineShieldCheck },
-            { name: "Stripe", icon: SiStripe },
-            { name: "Nodemailer", icon: HiOutlineMail },
-            { name: "Axios", icon: SiAxios },
-        ],
-    },
-    {
-        title: "Tools & Other",
-        skills: [
-            { name: "Git", icon: SiGit },
-            { name: "GitHub", icon: SiGithub },
-            { name: "Vercel", icon: SiVercel },
-            { name: "Netlify", icon: SiNetlify },
-            { name: "Recharts", icon: HiOutlineChartBar },
-            { name: "Figma", icon: SiFigma },
-            { name: "Visual Studio Code", icon: VscVscode },
-            { name: "Google Fonts", icon: SiGooglefonts },
-            { name: "Penpot", icon: SiPenpot },
-            { name: "AI-Assisted Coding", icon: HiOutlineSparkles },
-        ],
-    },
+/* ── Row 1: Technologies ── */
+const TECH_SKILLS = [
+    { name: "Tailwind CSS", icon: SiTailwindcss, color: "#38bdf8" },
+    { name: "Next.js", icon: SiNextdotjs, color: "#ffffff" },
+    { name: "MongoDB", icon: SiMongodb, color: "#47a248" },
+    { name: "Express.js", icon: SiExpress, color: "#ffffff" },
+    { name: "Node.js", icon: SiNodedotjs, color: "#68a063" },
+    { name: "Hero UI", icon: HiOutlineColorSwatch, color: "#6366f1" },
+    { name: "React.js", icon: SiReact, color: "#61dafb" },
+    { name: "DaisyUI", icon: SiDaisyui, color: "#1ad1a5" },
+    { name: "Motion", icon: SiFramer, color: "#e846ff" },
+    { name: "GSAP", icon: SiGreensock, color: "#88ce02" },
+    { name: "REST API", icon: TbApi, color: "#14b8a6" },
+    { name: "Lenis", icon: HiOutlineCode, color: "#ec4899" },
 ];
 
-const fadeUp = {
-    hidden: { opacity: 0, y: 20 },
-    show: (i = 0) => ({
-        opacity: 1,
-        y: 0,
-        transition: { duration: 0.5, delay: i * 0.04, ease: "easeOut" },
-    }),
-};
+/* ── Row 2: Tools ── */
+const TOOL_SKILLS = [
+    { name: "Git", icon: SiGit, color: "#f05032" },
+    { name: "GitHub", icon: SiGithub, color: "#ffffff" },
+    { name: "Stripe", icon: SiStripe, color: "#635bff" },
+    { name: "Netlify", icon: SiNetlify, color: "#00c7b7" },
+    { name: "Vercel", icon: SiVercel, color: "#ffffff" },
+    { name: "Better Auth", icon: HiOutlineShieldCheck, color: "#6366f1" },
+    { name: "VS Code", icon: VscVscode, color: "#007acc" },
+];
+
+/* Duplicate items so the scroll looks infinite */
+function tripleList(items) {
+    return [...items, ...items, ...items];
+}
+
+/* Single marquee card */
+function SkillCard({ skill }) {
+    const Icon = skill.icon;
+    return (
+        <div className="skills-marquee-card">
+            <Icon className="skills-marquee-icon" style={{ color: skill.color }} />
+            <span className="skills-marquee-name">{skill.name}</span>
+        </div>
+    );
+}
+
+/* Separator slash */
+function Slash() {
+    return <span className="skills-marquee-slash">/</span>;
+}
+
+/* A single scrolling row */
+function MarqueeRow({ items, direction = "left", duration = 35 }) {
+    const tripled = tripleList(items);
+
+    return (
+        <div className="skills-marquee-track">
+            <motion.div
+                className="skills-marquee-inner"
+                animate={{
+                    x: direction === "left"
+                        ? ["0%", "-33.333%"]
+                        : ["-33.333%", "0%"],
+                }}
+                transition={{
+                    x: {
+                        repeat: Infinity,
+                        repeatType: "loop",
+                        duration,
+                        ease: "linear",
+                    },
+                }}
+            >
+                {tripled.map((skill, i) => (
+                    <div key={`${skill.name}-${i}`} className="skills-marquee-item">
+                        <SkillCard skill={skill} />
+                        {i < tripled.length - 1 && <Slash />}
+                    </div>
+                ))}
+            </motion.div>
+        </div>
+    );
+}
 
 export default function Skills() {
     return (
-        <section
-            id="skills"
-            className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-20 lg:py-28"
-        >
-            <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-                className="text-3xl sm:text-4xl font-bold text-center mb-16"
-            >
-                My{" "}
-                <span className="px-2 -mx-1 bg-foreground text-background rounded-sm">
-                    Skills
-                </span>
-            </motion.h2>
+        <section id="skills" className="skills-section">
+            {/* Background glow orbs */}
+            <div className="skills-bg-orb skills-bg-orb--1" />
+            <div className="skills-bg-orb skills-bg-orb--2" />
 
-            <div className="space-y-14">
-                {SKILL_GROUPS.map((group) => (
-                    <div key={group.title}>
-                        <motion.h3
-                            initial={{ opacity: 0, x: -10 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.4 }}
-                            className="text-lg font-semibold mb-6 text-muted-foreground uppercase tracking-wide text-sm"
-                        >
-                            {group.title}
-                        </motion.h3>
+            <div className="skills-container">
+                {/* Section header */}
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    className="skills-header"
+                >
+                    <span className="skills-badge">
+                        <span className="skills-badge-dot" />
+                        Tech Stack
+                    </span>
+                    <h2 className="skills-heading">
+                        Technologies &{" "}
+                        <span className="skills-heading-highlight">Tools</span>
+                    </h2>
+                    <p className="skills-subtitle">
+                        The technologies and tools I use to bring ideas to life.
+                    </p>
+                </motion.div>
 
-                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                            {group.skills.map((skill, i) => {
-                                const Icon = skill.icon;
-                                return (
-                                    <motion.div
-                                        key={skill.name}
-                                        initial="hidden"
-                                        whileInView="show"
-                                        viewport={{ once: true }}
-                                        custom={i}
-                                        variants={fadeUp}
-                                        whileHover={{ y: -4 }}
-                                        className="group flex flex-col items-center justify-center gap-3 aspect-square border border-border rounded-md p-4 bg-card hover:bg-foreground hover:text-background hover:border-foreground transition-colors duration-300 cursor-default"
-                                    >
-                                        <Icon className="w-7 h-7 sm:w-8 sm:h-8 transition-colors duration-300" />
-                                        <span className="text-xs sm:text-sm font-medium text-center leading-tight">
-                                            {skill.name}
-                                        </span>
-                                    </motion.div>
-                                );
-                            })}
+                {/* Marquee rows */}
+                <div className="skills-marquee-wrapper">
+                    {/* Row 1 — Technologies → scrolls left */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.15 }}
+                    >
+                        <span className="skills-row-label">Technologies</span>
+                        <div className="skills-marquee-row">
+                            <div className="skills-marquee-fade skills-marquee-fade--left" />
+                            <MarqueeRow items={TECH_SKILLS} direction="left" duration={40} />
+                            <div className="skills-marquee-fade skills-marquee-fade--right" />
                         </div>
-                    </div>
-                ))}
+                    </motion.div>
+
+                    {/* Row 2 — Tools → scrolls right */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.3 }}
+                    >
+                        <span className="skills-row-label">Tools &amp; Services</span>
+                        <div className="skills-marquee-row">
+                            <div className="skills-marquee-fade skills-marquee-fade--left" />
+                            <MarqueeRow items={TOOL_SKILLS} direction="right" duration={30} />
+                            <div className="skills-marquee-fade skills-marquee-fade--right" />
+                        </div>
+                    </motion.div>
+                </div>
             </div>
         </section>
     );

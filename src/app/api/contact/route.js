@@ -7,7 +7,7 @@ const isValidEmail = (email) =>
 
 export async function POST(req) {
   try {
-    const { name, email, message } = await req.json();
+    const { name, email, subject, message } = await req.json();
 
     if (!name?.trim() || !email?.trim() || !message?.trim()) {
       return NextResponse.json(
@@ -44,8 +44,10 @@ export async function POST(req) {
       from: `"Portfolio Contact" <${process.env.GMAIL_USER}>`,
       to: process.env.GMAIL_USER,
       replyTo: email,
-      subject: `New message from ${name} (Portfolio Contact Form)`,
-      text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
+      subject: subject?.trim()
+        ? `${subject.trim()} — from ${name} (Portfolio)`
+        : `New message from ${name} (Portfolio Contact Form)`,
+      text: `Name: ${name}\nEmail: ${email}\nSubject: ${subject || "N/A"}\n\nMessage:\n${message}`,
       html: `
         <div style="font-family: sans-serif; line-height: 1.6;">
           <h2>New Portfolio Contact</h2>

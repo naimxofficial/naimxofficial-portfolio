@@ -1,94 +1,185 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "motion/react";
 import { FaGithub, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
-import { HiOutlineMail, HiArrowUp } from "react-icons/hi";
+import { HiOutlineMail } from "react-icons/hi";
 
 const NAV_LINKS = [
-  { label: "About Me", href: "#about" },
-  { label: "Skills", href: "#skills" },
-  { label: "Projects", href: "#projects" },
-  { label: "Contact Me", href: "#contact" },
+    { label: "Home", href: "#" },
+    { label: "About", href: "#about" },
+    { label: "Skills", href: "#skills" },
+    { label: "Projects", href: "#projects" },
+    { label: "Education", href: "#education" },
+    { label: "Contact", href: "#contact" },
 ];
 
 const SOCIALS = [
-  { icon: FaGithub, href: "https://github.com/naimxofficial", label: "GitHub" },
-  { icon: FaXTwitter, href: "https://x.com/naimxofficial", label: "X" },
-  { icon: FaLinkedinIn, href: "#", label: "LinkedIn" }, // TODO: add your LinkedIn link
-  { icon: HiOutlineMail, href: "mailto:naimxofficial.bd@gmail.com", label: "Email" },
+    { icon: FaGithub, href: "https://github.com/naimxofficial", label: "GitHub" },
+    { icon: FaLinkedinIn, href: "#", label: "LinkedIn" },
+    { icon: FaXTwitter, href: "https://x.com/naimxofficial", label: "X" },
+    { icon: HiOutlineMail, href: "mailto:naimxofficial.bd@gmail.com", label: "Email" },
 ];
 
 export default function Footer() {
-  const year = new Date().getFullYear();
+    const currentYear = new Date().getFullYear();
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+    return (
+        <footer className="relative overflow-hidden pt-16 pb-8">
+            {/* Background glow */}
+            <div
+                className="absolute rounded-full pointer-events-none"
+                style={{
+                    width: 600,
+                    height: 600,
+                    background: "var(--glow)",
+                    filter: "blur(140px)",
+                    bottom: "-30%",
+                    left: "50%",
+                    transform: "translateX(-50%)",
+                    opacity: 0.15,
+                    zIndex: 0,
+                }}
+            />
 
-  return (
-    <footer className="border-t border-border">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-12 flex flex-col items-center gap-8">
-        {/* Logo */}
-        <Link
-          href="/"
-          className="flex items-center gap-2 font-semibold text-lg tracking-tight"
-        >
-          {/* <span className="inline-block w-2 h-2 rounded-full bg-foreground" /> */}
-          naimxofficial<span className="text-foreground/50">.</span>
-        </Link>
+            <div className="relative z-[1] max-w-[76rem] mx-auto px-5 sm:px-8 lg:px-10">
+                {/* Top divider with gradient */}
+                <div
+                    className="h-px w-full mb-12"
+                    style={{
+                        background:
+                            "linear-gradient(90deg, transparent, var(--accent), var(--accent-2), var(--accent-3), transparent)",
+                    }}
+                />
 
-        {/* Nav links */}
-        <ul className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
-          {NAV_LINKS.map((link) => (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
+                {/* Main footer content */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 mb-12">
+                    {/* Brand column */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5 }}
+                    >
+                        <a
+                            href="#"
+                            className="inline-block font-heading text-xl font-bold mb-4 no-underline"
+                            style={{
+                                background:
+                                    "linear-gradient(135deg, var(--accent), var(--accent-2))",
+                                WebkitBackgroundClip: "text",
+                                backgroundClip: "text",
+                                color: "transparent",
+                            }}
+                        >
+                            naimxofficial
+                        </a>
+                        <p
+                            className="text-sm leading-relaxed max-w-xs"
+                            style={{ color: "var(--muted-foreground)" }}
+                        >
+                            Full-stack developer specializing in building
+                            exceptional digital experiences with modern web
+                            technologies.
+                        </p>
+                    </motion.div>
 
-        {/* Socials */}
-        <div className="flex items-center gap-4">
-          {SOCIALS.map(({ icon: Icon, href, label }) => (
-            <a
-              key={label}
-              href={href}
-              target={href.startsWith("http") ? "_blank" : undefined}
-              rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-              aria-label={label}
-              className="flex items-center justify-center w-9 h-9 rounded-full border border-border hover:bg-foreground hover:text-background hover:border-foreground transition-colors duration-300"
-            >
-              <Icon className="w-4 h-4" />
-            </a>
-          ))}
-        </div>
+                    {/* Quick links */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.1 }}
+                    >
+                        <h4
+                            className="font-mono text-xs font-semibold uppercase tracking-widest mb-4"
+                            style={{ color: "var(--accent-2)" }}
+                        >
+                            Quick Links
+                        </h4>
+                        <nav className="flex flex-col gap-2.5">
+                            {NAV_LINKS.map(({ label, href }) => (
+                                <a
+                                    key={label}
+                                    href={href}
+                                    className="footer-nav-link"
+                                >
+                                    {label}
+                                </a>
+                            ))}
+                        </nav>
+                    </motion.div>
 
-        <div className="w-full h-px bg-border" />
+                    {/* Connect column */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.2 }}
+                    >
+                        <h4
+                            className="font-mono text-xs font-semibold uppercase tracking-widest mb-4"
+                            style={{ color: "var(--accent-2)" }}
+                        >
+                            Connect
+                        </h4>
+                        <div className="flex gap-3 mb-5">
+                            {SOCIALS.map(({ icon: Icon, href, label }) => (
+                                <a
+                                    key={label}
+                                    href={href}
+                                    target={href.startsWith("http") ? "_blank" : undefined}
+                                    rel={
+                                        href.startsWith("http")
+                                            ? "noopener noreferrer"
+                                            : undefined
+                                    }
+                                    aria-label={label}
+                                    className="footer-social-link"
+                                >
+                                    <Icon />
+                                </a>
+                            ))}
+                        </div>
+                        <p
+                            className="text-sm"
+                            style={{ color: "var(--muted-foreground)" }}
+                        >
+                            naimxofficial.bd@gmail.com
+                        </p>
+                    </motion.div>
+                </div>
 
-        {/* Bottom row */}
-        <div className="w-full flex flex-col-reverse sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-muted-foreground text-center sm:text-left">
-            &copy; {year} Muhammad Naim Uddin. All rights reserved.
-          </p>
-
-          <motion.button
-            onClick={scrollToTop}
-            whileHover={{ y: -2 }}
-            aria-label="Back to top"
-            className="flex items-center gap-2 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors"
-          >
-            Back to top
-            <span className="flex items-center justify-center w-7 h-7 rounded-full border border-border">
-              <HiArrowUp className="w-3.5 h-3.5" />
-            </span>
-          </motion.button>
-        </div>
-      </div>
-    </footer>
-  );
+                {/* Bottom bar */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                    className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4"
+                    style={{ borderTop: "1px solid var(--border)" }}
+                >
+                    <p
+                        className="text-xs"
+                        style={{ color: "var(--muted-foreground)" }}
+                    >
+                        &copy; {currentYear} Muhammad Naim Uddin. All rights
+                        reserved.
+                    </p>
+                    <p className="text-xs" style={{ color: "var(--muted-foreground)" }}>
+                        Designed & Built with{" "}
+                        <span
+                            className="inline-block"
+                            style={{
+                                color: "var(--accent-2)",
+                                animation: "pulse-dot 2s ease-in-out infinite",
+                            }}
+                        >
+                            ♥
+                        </span>{" "}
+                        using Next.js & Motion
+                    </p>
+                </motion.div>
+            </div>
+        </footer>
+    );
 }
