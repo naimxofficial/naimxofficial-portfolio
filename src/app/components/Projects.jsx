@@ -90,7 +90,7 @@ const PROJECTS = [
         accentColor: "#14b8a6",
         icon: SiReact,
         liveLink: "https://digitools-platform-naimxofficial.netlify.app/",
-        clientRepo: "https://github.com/naimxofficial/DigiTools",
+        clientRepo: "https://github.com/naimxofficial/DigiTools-Platform",
         serverRepo: null,
     },
 ];

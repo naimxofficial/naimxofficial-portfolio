@@ -6,48 +6,49 @@ import { Switch } from "@heroui/react";
 import { useEffect, useState } from "react";
 
 export function ThemeSwitch() {
-    const { resolvedTheme, setTheme } = useTheme();
-    const [mounted, setMounted] = useState(false);
+  const { resolvedTheme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
-    useEffect(() => {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
-        setMounted(true);
-    }, []);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
-    if (!mounted) {
-        return (
-            <div className="w-11 h-6 rounded-full bg-gray-200 dark:bg-zinc-700" />
-        );
-    }
-
-    const isDark = resolvedTheme === "dark";
-
-    const toggleTheme = () => {
-        setTheme(isDark ? "light" : "dark");
-    };
-
+  if (!mounted) {
     return (
-        <Switch
-            isSelected={isDark}
-            onChange={toggleTheme}
-            size="lg"
-            aria-label="Toggle theme"
-        >
-            {/* Added Switch.Content wrapper required by HeroUI v3 */}
-            <Switch.Content>
-                <Switch.Control>
-                    <Switch.Thumb>
-                        <Switch.Icon>
-                            {/* Replaced 'isSelected' with your existing 'isDark' state */}
-                            {isDark ? (
-                                <Moon className="size-3.5 text-inherit" />
-                            ) : (
-                                <Sun className="size-3.5 text-inherit" />
-                            )}
-                        </Switch.Icon>
-                    </Switch.Thumb>
-                </Switch.Control>
-            </Switch.Content>
-        </Switch>
+      <div className="w-11 h-6 rounded-full bg-[var(--muted)] border border-[var(--border)]" />
     );
+  }
+
+  const isDark = resolvedTheme === "dark";
+
+  return (
+    <Switch
+      isSelected={isDark}
+      onChange={() => setTheme(isDark ? "light" : "dark")}
+      size="lg"
+      aria-label="Toggle theme"
+    >
+      {({ isSelected }) => (
+        <Switch.Content>
+          <Switch.Control
+            className={
+              isSelected
+                ? "bg-gradient-to-r from-[#6366f1] to-[#ec4899]"  // Nebula Forge
+                : "bg-muted"
+            }
+          >
+            <Switch.Thumb>
+              <Switch.Icon>
+                {isSelected ? (
+                  <Moon className="size-3.5 text-inherit opacity-100" />
+                ) : (
+                  <Sun className="size-3.5 text-inherit opacity-70" />
+                )}
+              </Switch.Icon>
+            </Switch.Thumb>
+          </Switch.Control>
+        </Switch.Content>
+      )}
+    </Switch>
+  );
 }
