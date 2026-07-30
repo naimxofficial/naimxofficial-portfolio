@@ -5,6 +5,8 @@ import Projects from "./components/Projects";
 import Education from "./components/Education";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import Services from "./components/Services";
+import Blog from "./components/Blog";
 
 export default function Home() {
   return (
@@ -18,11 +20,17 @@ export default function Home() {
       {/* Skills Section */}
       <Skills />
 
+      {/* Services Section */}
+      <Services />
+
       {/* Projects Section */}
       <Projects />
 
       {/* Education Section */}
       <Education />
+
+      {/* Blog Section */}
+      <Blog />
 
       {/* Contact Section */}
       <Contact />
