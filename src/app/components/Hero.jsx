@@ -7,9 +7,9 @@ import { FaCode, FaPaperPlane, FaArrowDown } from "react-icons/fa6";
 import ParticleField from "./ParticleField";
 
 const TYPING_WORDS = [
-  "Full-Stack Development",
-  "React & Next.js",
-  "Modern Web Apps",
+  "Full-Stack Web Apps",
+  "Modern React Applications",
+  "Interactive User Interfaces",
   "Scalable Systems",
 ];
 

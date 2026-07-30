@@ -85,7 +85,7 @@ export default function Navbar({ visible }) {
             {/* Logo */}
             <Link
               href="/"
-              className="flex items-center gap-1.5 font-bold text-base tracking-tight shrink-0"
+              className="flex items-center gap-1.5 font-bold text-xl tracking-tight shrink-0"
             >
               <span className="text-gradient font-heading">naimxofficial</span>
             </Link>

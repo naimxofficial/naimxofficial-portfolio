@@ -131,7 +131,7 @@ export default function About() {
               <span className="text-[var(--foreground)] font-semibold">
                 Md. Naim Uddin
               </span>
-              , a full-stack developer with a diploma in Computer Science &
+              , a MERN-stack developer with a Diploma in Engineering in Computer Science &
               Technology. I started coding out of genuine curiosity about how
               systems work under the hood — and that curiosity turned into a
               focused practice of building complete, modern web applications.
